@@ -1,34 +1,31 @@
 import React from 'react';
 
-export default function GiftItem({ index, gift, addGift, autofocus }) {
+export default function GiftItem({ gift, addGift, autofocus }) {
 
   function updateGift(ev) {
     var value = ev.target.value;
     addGift(prev => {
-      var copy = [...prev];
-      copy[index].desc = value;
-      console.debug(copy);
-      return copy;
+      // TODO: make state copy
+      gift.desc = value;
+      return prev;
     });
   }
 
   function commitChange(ev) {
     var value = ev.target.value;
     addGift(prev => {
-      var copy = [...prev];
-      if (value === '')
-        copy.splice(index, 1);
-      return copy;
+      // TODO: make state copy
+      prev.delete(gift);
+      return prev;
     });
   }
 
   function markCompleted(ev) {
     var checked = ev.target.checked;
     addGift(prev => {
-      var copy = [...prev];
-      copy[index].completed = checked;
-      console.debug(copy, checked);
-      return copy;
+      // TODO: make state copy
+      gift.completed = checked;
+      return prev;
     });
   }
 
