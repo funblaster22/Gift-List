@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import './App.css';
 import {post} from './Constants.js';
 
-export default function Signup({toggle}) { console.log('generate Family code...')
+export default function Signup({toggle}) {
+  console.log('Generate family code...')
+  const familyCodeRef = useRef();
 
   function randomLetters(length) {
     var final = "";
@@ -23,10 +25,10 @@ export default function Signup({toggle}) { console.log('generate Family code...'
   }
 
   return (
-    <form action="/api/new" method="post" onSubmit={() => {localStorage.currentUser = null}}>
+    <form action="/api/new" method="post" onSubmit={() => {localStorage.currentUser = familyCodeRef.current.value}}>
       <label>
         Family Code:
-        <input defaultValue={randomLetters(8)} minLength="8" required onInput={validate} name="code" />
+        <input defaultValue={randomLetters(8)} minLength="8" ref={familyCodeRef} required onInput={validate} name="code" />
       </label>
       <button onClick={toggle.bind(this, true)}>Join Family</button><br />
       <label>

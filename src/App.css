@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   overflow-x: hidden;
-  /* TODO: border is being cut off, noticably when body padding is increased */
+  /* TODO: border is being cut off, noticeably when body padding is increased */
 }
 
 body {
@@ -42,7 +42,7 @@ input[type=text] {
 }
 
 #login {
-  border: 2px solid gray;
+  border: 2px solid #808080;
   border-radius: 10px;
   padding: 20px;
   margin: 10px;

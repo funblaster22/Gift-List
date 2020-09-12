@@ -6,7 +6,7 @@ export default function Person({ name }) {
   return (
     <fieldset>
       <legend>{name}</legend>
-      <GiftList />
+      <GiftList name={name} />
     </fieldset>
   );
 }
