@@ -11,12 +11,12 @@ export default function Signup({toggle}) { console.log('generate Family code...'
   }
 
   return (
-    <form action="/api/new" method="post">
+    <form action="/api/new" method="post" onSubmit={localStorage.currentUser = null}>
       <label>
         Family Code:
         <input defaultValue={randomLetters(8)} name="code" />
       </label>
-      <button onClick={toggle.bind(this, true)}>Join Family</button><br />
+      <button onClick={toggle.bind(this, true)} role="button">Join Family</button><br />
       <label>
         Name:
         <input name="name" />
