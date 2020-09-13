@@ -16,6 +16,8 @@ fieldset {
   max-width: 500px;
   width: 100vw;
   display: inline-block;
+  /* Needed for ios */
+  overflow-x: visible;
 }
 
 input[type=text] {

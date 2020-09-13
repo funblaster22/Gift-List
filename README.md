@@ -30,7 +30,7 @@ Creates a private server that can only be accessed exclusively by members of the
 **Upcoming Features:**
 - [ ] Display notice on request error
 - [ ] Filter gifts server-side
-- [ ] Handle merge conflicts (if 2 people use simultaneously)
+- [ ] Handle merge conflicts (if 2 people use simultaneously) OR real-time updates (with websockets)
 - [ ] approval process for new IP addresses
 - See TODOs in source
 
