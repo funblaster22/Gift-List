@@ -12,4 +12,7 @@ export const post = async (url, data = {}) => (await fetch(url, {
 })).json();
 
 // TODO: display notice on request error
+/**
+ * @type {Promise<Object<string, {desc: string, completed: boolean, addedBy: string}[]>>}
+ */
 export const FAMILY_MEMBERS = post('api/getFamily');

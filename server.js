@@ -8,7 +8,9 @@ var accounts = JSON.parse(fs.readFileSync(__dirname + '/accounts.json'));
 
 // Serve the static files from the React app
 app.use(express.static(__dirname + '/build'));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// For getting client's IP address
 app.use(requestIp.mw());
 
 
