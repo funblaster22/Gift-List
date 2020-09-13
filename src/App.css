@@ -49,3 +49,14 @@ input[type=text] {
   max-width: 474px;
   width: 100%;
 }
+
+input:invalid {
+  border: 1px solid #ff0000;
+  margin: 2px;
+}
+
+input:focus {
+  border-width: 3px;
+  margin: 0;
+  outline: none;
+}

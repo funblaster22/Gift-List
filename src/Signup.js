@@ -29,7 +29,6 @@ export default function Signup({toggle}) {
     localStorage.userName = name.value;
   }
 
-  // TODO: css styles for invalid input (:invalid)
   return (
     <form action="/api/new" method="post" onSubmit={beforeSubmit}>
       <label>
