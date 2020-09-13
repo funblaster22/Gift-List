@@ -40,7 +40,7 @@ function commitAccountFile() {
 }
 
 app.post('/api/getFamily', (req, res) => {
-  let family = accounts[req.body.code];
+  const family = accounts[req.body.code];
   if (validateInputs(req, res))
     res.json(family.people);
 });
@@ -50,7 +50,6 @@ app.post('/api/addGift', (req, res) => {
   // TODO: handle merge conflicts (if 2 people using simultaneously)
   if (validateInputs(req, res) && req.body.gifts.length > 0) {
     accounts[req.body.code].people[req.body.to] = req.body.gifts;
-    console.log(accounts[req.body.code].people)
     commitAccountFile()
   }
   res.json('{}');
@@ -59,14 +58,31 @@ app.post('/api/addGift', (req, res) => {
 
 app.post('/api/new', (req, res) => {
   if (req.body.code in accounts) {
-    res.send("What are you doing here? That account name exists, try again");
+    res.status(400);
+    res.json({error: "That account name exists, try again"});
     // TODO: maybe ban IP?
+    return;
+  }
+  else if (req.body.code.length < 8) {
+    res.status(400);
+    res.json({error: "Family code must be at least 8 characters"});
     return;
   }
   accounts[req.body.code] = { "_ip": req.clientIp, people: {} };
   accounts[req.body.code].people[req.body.name] = [];
   commitAccountFile()
   res.redirect('/');
+});
+
+app.post('/api/login', (req, res) => {
+  let family = accounts[req.body.code].people;
+  if (validateInputs(req, res)) {
+    if (!(req.body.name in family)) {
+      family[req.body.name] = [];
+      commitAccountFile()
+    }
+    res.redirect('/');
+  }
 });
 
 const port = process.env.PORT || 5000;

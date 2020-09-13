@@ -8,7 +8,7 @@ export const post = async (url, data = {}) => (await fetch(url, {
     'Content-Type': 'application/json'
     // 'Content-Type': 'application/x-www-form-urlencoded',
   },
-  body: JSON.stringify({...data, code: localStorage.familyName}) // body data type must match "Content-Type" header
+  body: JSON.stringify({code: localStorage.familyName, ...data}) // body data type must match "Content-Type" header
 })).json();
 
 // TODO: display notice on request error
