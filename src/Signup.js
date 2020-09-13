@@ -33,7 +33,7 @@ export default function Signup({toggle}) {
     <form action="/api/new" method="post" onSubmit={beforeSubmit}>
       <label>
         Family Code:
-        <input defaultValue={randomLetters(8)} minLength="8" required onInput={validate} name="code" />
+        <input defaultValue={randomLetters(8)} minLength="8" autoCorrect="off" autoCapitalize="off" required onInput={validate} name="code" />
       </label>
       <button onClick={toggle.bind(this, true)}>Join Family</button><br />
       <label>

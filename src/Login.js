@@ -29,7 +29,7 @@ export default function Login({toggle, people, editPeople}) {
     <form action="/api/login" method="post" onSubmit={beforeSubmit}>
       <label>
         Family Code:
-        <input onBlur={loadFamilyCode} name="code" required />
+        <input onBlur={loadFamilyCode} autoCorrect="off" autoCapitalize="off" name="code" required />
       </label>
       <button onClick={toggle.bind(this, false)}>New Family</button><br />
       <Autocomplete

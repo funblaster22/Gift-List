@@ -31,7 +31,7 @@ function validateInputs(req, res) {
   if (!family) {
     res.status(404);
     res.json({"error": `Family '${req.body.code}' does not exist`});
-  } else if (family._ip !== req.clientIp) {
+  } else if (!family._ip.includes(generalizeIP(req.clientIp))) {
     // Security measure to prevent random people from messing with gift list
     res.status(403);
     res.json({"error": "Your IP address is not approved to access this account"});
@@ -44,6 +44,12 @@ function validateInputs(req, res) {
 
 function commitAccountFile() {
   fs.writeFileSync(__dirname + '/accounts.json', JSON.stringify(accounts, null, 2), 'utf-8');
+}
+
+function generalizeIP(addr) {
+  let split = addr.split('.');
+  split.pop();
+  return split.join('.');
 }
 
 app.post('/api/getFamily', (req, res) => {
@@ -75,7 +81,7 @@ app.post('/api/new', (req, res) => {
     res.json({error: "Family code must be at least 8 characters"});
     return;
   }
-  accounts[req.body.code] = { "_ip": req.clientIp, people: {} };
+  accounts[req.body.code] = { "_ip": [generalizeIP(req.clientIp)], people: {} };
   accounts[req.body.code].people[req.body.name] = [];
   commitAccountFile()
   res.redirect('/');
