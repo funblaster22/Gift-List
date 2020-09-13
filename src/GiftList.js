@@ -4,13 +4,12 @@ import {FAMILY_MEMBERS, post} from "./Constants";
 
 export default function GiftList({name}) {
   const [gifts, addGift] = useState([]);
-  // {desc: "something cool", completed: false, addedBy: "" }
 
   useEffect(() => {
-    // TODO: filter items added by other members
+    // TODO: filter items server side (for particularly nosey children)?
     FAMILY_MEMBERS.then(people => {
-      console.log(name, people[name])
-      addGift(people[name]);
+      const gifts = people[name].filter(item => name !== localStorage.userName || name === item.addedBy)
+      addGift(gifts);
     });
   }, []);
 
