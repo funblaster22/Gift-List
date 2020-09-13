@@ -1,11 +1,9 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import './App.css';
 import {post} from './Constants.js';
 
 export default function Signup({toggle}) {
-  console.log('Generate family code...')
-  const familyCodeRef = useRef();
-  const userNameRef = useRef();
+  console.log('Generate family code...');
 
   function randomLetters(length) {
     var final = "";
@@ -25,9 +23,10 @@ export default function Signup({toggle}) {
     }
   }
 
-  function beforeSubmit() {
-    localStorage.familyName = familyCodeRef.current.value;
-    localStorage.userName = userNameRef.current.value;
+  function beforeSubmit(ev) {
+    const {code, name} = ev.target.elements;
+    localStorage.familyName = code.value;
+    localStorage.userName = name.value;
   }
 
   // TODO: css styles for invalid input (:invalid)
@@ -35,12 +34,12 @@ export default function Signup({toggle}) {
     <form action="/api/new" method="post" onSubmit={beforeSubmit}>
       <label>
         Family Code:
-        <input defaultValue={randomLetters(8)} minLength="8" ref={familyCodeRef} required onInput={validate} name="code" />
+        <input defaultValue={randomLetters(8)} minLength="8" required onInput={validate} name="code" />
       </label>
       <button onClick={toggle.bind(this, true)}>Join Family</button><br />
       <label>
         Name:
-        <input name="name" ref={userNameRef} required />
+        <input name="name" required />
       </label>
       <button type="submit" style={{width: '100%'}}>Sign Up</button>
     </form>
