@@ -4,7 +4,12 @@ const requestIp = require('request-ip');
 const fs = require('fs');
 
 const app = express();
-var accounts = JSON.parse(fs.readFileSync(__dirname + '/accounts.json'));
+var accounts = {};
+try {
+  accounts = JSON.parse(fs.readFileSync(__dirname + '/accounts.json'));
+} catch (err) {
+  commitAccountFile();
+}
 
 // Serve the static files from the React app
 app.use(express.static(__dirname + '/build'));
