@@ -19,7 +19,7 @@ function App() {
   }, [])
 
   return (
-    localStorage.currentUser ? people.map(person => <Person key={person} name={person} />) :
+    localStorage.familyName ? people.map(person => <Person key={person} name={person} />) :
       <PerfectCenter title="Gift List App" subtitle="Add gifts without recipient seeing!">
       {hasFamily ? <Login toggle={setHasFamily} people={people} editPeople={addPerson} /> : <Signup toggle={setHasFamily} />}
       </PerfectCenter>
