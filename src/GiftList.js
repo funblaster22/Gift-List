@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import GiftItem from './GiftItem.js';
-import {FAMILY_MEMBERS} from "./Constants";
+import {FAMILY_MEMBERS, post} from "./Constants";
 
 export default function GiftList({name}) {
   const [gifts, addGift] = useState([]);
@@ -12,17 +12,20 @@ export default function GiftList({name}) {
       console.log(name, people[name])
       addGift(people[name]);
     });
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    post('/api/addGift', {to: name, gifts: gifts});
+  }, [gifts]);
 
   function newGift(ev) {
     var value = ev.target.value;
     ev.target.value = null;
     addGift(prev => {
-      return [...prev, {desc: value, completed: false}];
+      return [...prev, {desc: value, completed: false, addedBy: localStorage.userName}];
     });
   }
 
-  console.debug(gifts);
   return (
     <>
     { gifts.map((gift, i) =>
